@@ -14,7 +14,7 @@ services:
       - ./data/GeoLite2-City.mmdb:/GeoLite2-City.mmdb 
       - ./dsp-configs:/dsp-configs  
     ports:
-      - 80:3060
+      - 3060:3060
     environment:
       DEBUG: true
       SERVER_LISTEN_NETWORK: tcp4
