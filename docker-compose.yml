@@ -9,7 +9,7 @@ services:
         max-file: "5"
     restart: always
     ports:
-      80:3060
+      - 80:3060
     environment:
       DEBUG: true
       SERVER_LISTEN_NETWORK: tcp4
