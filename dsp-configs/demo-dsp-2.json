@@ -1,0 +1,5 @@
+{
+  "name":"demo-dsp-2",
+  "endpoint":"http://demo-dsp-2:8070/openrtb",
+  "request_timeout":500
+}

@@ -1,0 +1,47 @@
+version: '3'
+services:
+  prebid-server:
+    container_name: prebid-server
+    image: rapidcodelab/rapid-prebid-server  
+    logging:
+      options:
+        max-size: "50k"
+        max-file: "5"
+    restart: always
+    ports:
+      80:3060
+    environment:
+      DEBUG: true
+      SERVER_LISTEN_NETWORK: tcp4
+      SERVER_LISTEN_ADDR: :3060
+      BOLTDB_PATH: ./data/inventory.db
+      DEVICE_DB_PATH: ./data/browscap.ini
+      GEO_DB_PATH: ./data/GeoLite2-City.mmdb
+      DSP_ADAPTERS_CONFIG_FILES_PATH: ./dsp-configs
+      ENABLED_DSP_ADAPTERS: demo-dsp-1,demo-dsp-2
+  demo-dsp-1:
+    container_name: demo-dsp-1
+    image: rapidcodelab/fakedsp:0.0.14
+    logging:
+      options:
+        max-size: "50k"
+        max-file: "5"
+    restart: always
+    volumes:
+      - ./ads-dsp-1.json:/ads.json
+    environment:
+      LISTEN_ADDR: :8060
+      ADS_DATABASE_PATH: /ads.json
+  demo-dsp-2:
+    container_name: demo-dsp-2
+    image: rapidcodelab/fakedsp:0.0.14
+    logging:
+      options:
+        max-size: "50k"
+        max-file: "5"
+    restart: always
+    volumes:
+      - ./ads-dsp-2.json:/ads.json
+    environment:
+      LISTEN_ADDR: :8070
+      ADS_DATABASE_PATH: /ads.json
