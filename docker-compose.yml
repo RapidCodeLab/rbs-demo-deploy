@@ -12,6 +12,7 @@ services:
       - ./data/inventory.db:/inventory.db
       - ./data/browscap.ini:/browscap.ini
       - ./data/GeoLite2-City.mmdb:/GeoLite2-City.mmdb 
+      - ./dsp-configs:/dsp-configs  
     ports:
       - 80:3060
     environment:
