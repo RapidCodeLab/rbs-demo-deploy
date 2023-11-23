@@ -8,15 +8,19 @@ services:
         max-size: "50k"
         max-file: "5"
     restart: always
+    volumes:
+      - ./data/inventory.db:/inventory.db
+      - ./data/browscap.ini:/browscap.ini
+      - ./data/GeoLite2-City.mmdb:/GeoLite2-City.mmdb 
     ports:
       - 80:3060
     environment:
       DEBUG: true
       SERVER_LISTEN_NETWORK: tcp4
       SERVER_LISTEN_ADDR: :3060
-      BOLTDB_PATH: ./data/inventory.db
-      DEVICE_DB_PATH: ./data/browscap.ini
-      GEO_DB_PATH: ./data/GeoLite2-City.mmdb
+      BOLTDB_PATH: ./inventory.db
+      DEVICE_DB_PATH: ./browscap.ini
+      GEO_DB_PATH: ./GeoLite2-City.mmdb
       DSP_ADAPTERS_CONFIG_FILES_PATH: ./dsp-configs
       ENABLED_DSP_ADAPTERS: demo-dsp-1,demo-dsp-2
   demo-dsp-1:
